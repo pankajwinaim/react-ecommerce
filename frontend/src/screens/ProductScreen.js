@@ -45,7 +45,7 @@ function ProductScreen(props) {
   };
 
   return (
-    <div>
+    <div className="container">
       <div className="back-to-result">
         <Link to="/">Back to result</Link>
       </div>
@@ -56,10 +56,10 @@ function ProductScreen(props) {
       ) : (
         <>
           <div className="details">
-            <div className="details-image">
+            <div className="details-image col-md-6">
               <img src={product.image} alt="product"></img>
             </div>
-            <div className="details-info">
+            <div className="details-info col-md-6">
               <ul>
                 <li>
                   <h4>{product.name}</h4>
@@ -72,16 +72,16 @@ function ProductScreen(props) {
                     />
                   </a>
                 </li>
-                <li>
+                <li className='price'>
                   Price: <b>${product.price}</b>
                 </li>
-                <li>
-                  Description:
-                  <div>{product.description}</div>
+                <li className='description'>
+                  <h3>Description:</h3>
+                  <p>{product.description}</p>
                 </li>
               </ul>
-            </div>
-            <div className="details-action">
+
+              <div className="details-action">
               <ul>
                 <li>Price: {product.price}</li>
                 <li>
@@ -114,8 +114,42 @@ function ProductScreen(props) {
                   )}
                 </li>
               </ul>
+            </div> 
             </div>
+            
           </div>
+<div>
+  <h2>Recent Products</h2>
+  <ul class="products">
+    <li>
+    <img class="product-image" src="/uploads/1648294268124.jpg" alt="product"></img>
+    <div class="product-name">
+      <a href="product/623ef996d673485664470786">
+    Puma by Hrithik Roshan Men Black &amp; Grey Printed T-shirt</a>
+    </div>
+    <div class="product-brand">copperchips</div>
+    <div class="product-price">$158</div>
+    </li>
+    <li>
+    <img class="product-image" src="/uploads/1648361639529.jpg" alt="product"></img>
+    <div class="product-name">
+      <a href="/product/624000c5d673485664470843">
+    Puma by Hrithik Roshan Men Black &amp; Grey Printed T-shirt</a>
+    </div>
+    <div class="product-brand">copperchips</div>
+    <div class="product-price">$158</div>
+    </li>
+    <li>
+    <img class="product-image" src="/uploads/1648361639529.jpg" alt="product"></img>
+    <div class="product-name">
+      <a href="/product/624000c5d673485664470843">
+    Puma by Hrithik Roshan Men Black &amp; Grey Printed T-shirt</a>
+    </div>
+    <div class="product-brand">copperchips</div>
+    <div class="product-price">$158</div>
+    </li>
+    </ul>
+</div>
           <div className="content-margined">
             <h2>Reviews</h2>
             {!product.reviews.length && <div>There is no review</div>}

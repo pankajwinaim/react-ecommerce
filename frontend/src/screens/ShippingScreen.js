@@ -20,7 +20,7 @@ function ShippingScreen(props) {
   }
   return <div>
     <CheckoutSteps step1 step2 ></CheckoutSteps>
-    <div className="form">
+    <div className="form col-md-6 ">
       <form onSubmit={submitHandler} >
         <ul className="form-container">
           <li>

@@ -24,8 +24,8 @@ function CartScreen(props) {
     props.history.push("/signin?redirect=shipping");
   }
 
-  return <div className="cart">
-    <div className="cart-list">
+  return <div className="cart row">
+    <div className="cart-list col-md-8">
       <ul className="cart-list-container">
         <li>
           <h3>
@@ -43,29 +43,29 @@ function CartScreen(props) {
             :
             cartItems.map(item =>
               <li>
-                <div className="cart-image">
+                <div className="cart-image col-md-3">
                   <img src={item.image} alt="product" />
                 </div>
-                <div className="cart-name">
-                  <div>
+                <div className="cart-name col-md-5">
+                  <div className='product-cart-name'>
                     <Link to={"/product/" + item.product}>
                       {item.name}
                     </Link>
 
                   </div>
                   <div>
-                    Qty:
-                  <select value={item.qty} onChange={(e) => dispatch(addToCart(item.product, e.target.value))}>
+                   <b> Qty: </b>
+                  <select className="form-select cart-screen" value={item.qty} onChange={(e) => dispatch(addToCart(item.product, e.target.value))}>
                       {[...Array(item.countInStock).keys()].map(x =>
                         <option key={x + 1} value={x + 1}>{x + 1}</option>
                       )}
                     </select>
-                    <button type="button" className="button" onClick={() => removeFromCartHandler(item.product)} >
+                    <button type="button" className="button del-btn" onClick={() => removeFromCartHandler(item.product)} >
                       Delete
                     </button>
                   </div>
                 </div>
-                <div className="cart-price">
+                <div className="cart-price col-md-4">
                   ${item.price}
                 </div>
               </li>
@@ -74,10 +74,11 @@ function CartScreen(props) {
       </ul>
 
     </div>
-    <div className="cart-action">
+    <div className="cart-action col-md-4">
       <h3>
-        Subtotal ( {cartItems.reduce((a, c) => a + c.qty, 0)} items)
+        <b>Subtotal</b><br></br>( {cartItems.reduce((a, c) => a + c.qty, 0)} items)
         :
+        
          $ {cartItems.reduce((a, c) => a + c.price * c.qty, 0)}
       </h3>
       <button onClick={checkoutHandler} className="button primary full-width" disabled={cartItems.length === 0}>

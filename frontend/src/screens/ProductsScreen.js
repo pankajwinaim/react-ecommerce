@@ -73,8 +73,11 @@ function ProductsScreen(props) {
     );
   };
   const deleteHandler = (product) => {
-    dispatch(deleteProdcut(product._id));
+    if(window.confirm("Are you sure, you want to delete this product?") == true){
+      dispatch(deleteProdcut(product._id));
+    }
   };
+ 
   const uploadFileHandler = (e) => {
     const file = e.target.files[0];
     const bodyFormData = new FormData();
@@ -97,19 +100,44 @@ function ProductsScreen(props) {
   };
   return (
     <div className="content content-margined">
+      <div class="modal fade" id="myModal1" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <h3>Are You Sure.</h3>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal"  >Yes</button>          
+
+
+        </div>
+      </div>
+      
+    </div>
+  </div>
       <div className="product-header">
         <h3>Products</h3>
-        <button className="button primary" onClick={() => openModal({})}>
+        <button type="button" className="button primary" onClick={() => openModal({})} data-toggle="modal" data-target="#myModal">
           Create Product
         </button>
+        
       </div>
-      {modalVisible && (
-        <div className="form">
+      <div class="container">
+  
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h3 class="modal-title"><b>Create Product</b></h3>
+        </div>
+        <div class="modal-body">
+        <div className="form row">
+        
           <form onSubmit={submitHandler}>
             <ul className="form-container">
-              <li>
-                <h2>Create Product</h2>
-              </li>
               <li>
                 {loadingSave && <div>Loading...</div>}
                 {errorSave && <div>{errorSave}</div>}
@@ -117,31 +145,17 @@ function ProductsScreen(props) {
 
               <li>
                 <label htmlFor="name">Name</label>
-                <input
-                  type="text"
-                  name="name"
-                  value={name}
-                  id="name"
-                  onChange={(e) => setName(e.target.value)}
-                ></input>
-              </li>
+                <input type="text" name="name" value={name} id="name" onChange={(e) => setName(e.target.value)}></input>
+                </li>
               <li>
-                <label htmlFor="price">Price</label>
-                <input
-                  type="text"
-                  name="price"
-                  value={price}
-                  id="price"
+              <label htmlFor="price">Price</label>
+                <input type="text" name="price" value={price} id="price"
                   onChange={(e) => setPrice(e.target.value)}
                 ></input>
               </li>
               <li>
                 <label htmlFor="image">Image</label>
-                <input
-                  type="text"
-                  name="image"
-                  value={image}
-                  id="image"
+                <input type="hidden" name="image" value={image} id="image"
                   onChange={(e) => setImage(e.target.value)}
                 ></input>
                 <input type="file" onChange={uploadFileHandler}></input>
@@ -149,40 +163,25 @@ function ProductsScreen(props) {
               </li>
               <li>
                 <label htmlFor="brand">Brand</label>
-                <input
-                  type="text"
-                  name="brand"
-                  value={brand}
-                  id="brand"
+                <input type="text" name="brand" value={brand} id="brand"
                   onChange={(e) => setBrand(e.target.value)}
                 ></input>
               </li>
               <li>
                 <label htmlFor="countInStock">CountInStock</label>
-                <input
-                  type="text"
-                  name="countInStock"
-                  value={countInStock}
-                  id="countInStock"
+                <input type="text" name="countInStock" value={countInStock} id="countInStock"
                   onChange={(e) => setCountInStock(e.target.value)}
                 ></input>
               </li>
               <li>
                 <label htmlFor="name">Category</label>
-                <input
-                  type="text"
-                  name="category"
-                  value={category}
-                  id="category"
+                <input type="text" name="category" value={category} id="category"
                   onChange={(e) => setCategory(e.target.value)}
                 ></input>
               </li>
               <li>
                 <label htmlFor="description">Description</label>
-                <textarea
-                  name="description"
-                  value={description}
-                  id="description"
+                <textarea name="description" value={description} id="description"
                   onChange={(e) => setDescription(e.target.value)}
                 ></textarea>
               </li>
@@ -192,8 +191,7 @@ function ProductsScreen(props) {
                 </button>
               </li>
               <li>
-                <button
-                  type="button"
+                <button type="button"
                   onClick={() => setModalVisible(false)}
                   className="button secondary"
                 >
@@ -202,6 +200,22 @@ function ProductsScreen(props) {
               </li>
             </ul>
           </form>
+        </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+      
+      {modalVisible && (
+        
+        <div className="form">
+          
         </div>
       )}
 
@@ -226,11 +240,10 @@ function ProductsScreen(props) {
                 <td>{product.category}</td>
                 <td>{product.brand}</td>
                 <td>
-                  <button className="button" onClick={() => openModal(product)}>
+                  <button className="button" onClick={() => openModal(product)} data-toggle="modal" data-target="#myModal">
                     Edit
                   </button>{' '}
-                  <button
-                    className="button"
+                  <button className="button" 
                     onClick={() => deleteHandler(product)}
                   >
                     Delete

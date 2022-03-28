@@ -27,11 +27,11 @@ function App() {
   };
   return (
     <BrowserRouter>
-      <div className="grid-container">
+      <div className="container-main">
         <header className="header">
           <div className="brand">
             <button onClick={openMenu}>&#9776;</button>
-            <Link to="/">Copperchips</Link>
+            <Link to="/"> <img class="product-image" src="/uploads/logo.png" alt="logo"></img></Link>
           </div>
           <div className="header-links">
             <a href="cart.html">Cart</a>
@@ -68,7 +68,7 @@ function App() {
             </li>
           </ul>
         </aside>
-        <main className="main">
+        <main className="main container min-height-property">
           <div className="content">
             <Route path="/orders" component={OrdersScreen} />
             <Route path="/profile" component={ProfileScreen} />
