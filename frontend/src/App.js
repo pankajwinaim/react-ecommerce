@@ -14,6 +14,7 @@ import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import OrderScreen from './screens/OrderScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import OrdersScreen from './screens/OrdersScreen';
+import Notification from './components/Notification';
 
 function App() {
   const userSignin = useSelector((state) => state.userSignin);
@@ -52,6 +53,8 @@ function App() {
               </div>
             )}
           </div>
+          {/* <Notification msg={`this is the message for testing only`} /> */}
+
         </header>
         <aside className="sidebar">
           <h3>Shopping Categories</h3>
@@ -68,7 +71,7 @@ function App() {
             </li>
           </ul>
         </aside>
-        <main className="main container min-height-property">
+        <main className="main container-fluid min-height-property">
           <div className="content">
             <Route path="/orders" component={OrdersScreen} />
             <Route path="/profile" component={ProfileScreen} />

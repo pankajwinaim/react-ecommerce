@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { savePayment } from '../actions/cartActions';
+import { savePayment, codPayment } from '../actions/cartActions';
 import CheckoutSteps from '../components/CheckoutSteps';
 
 function PaymentScreen(props) {
@@ -11,7 +11,13 @@ function PaymentScreen(props) {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(savePayment({ paymentMethod }));
+    if (paymentMethod == "COD") {
+      dispatch(codPayment({ paymentMethod }));
+
+    } else {
+      dispatch(savePayment({ paymentMethod }));
+
+    }
     props.history.push('placeorder');
   };
   return (

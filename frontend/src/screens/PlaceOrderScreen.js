@@ -28,6 +28,10 @@ function PlaceOrderScreen(props) {
       orderItems: cartItems, shipping, payment, itemsPrice, shippingPrice,
       taxPrice, totalPrice
     }));
+    if (payment.paymentMethod == "COD") {
+      props.history.push("/profile");
+    }
+
   }
   useEffect(() => {
     if (success) {
@@ -46,7 +50,7 @@ function PlaceOrderScreen(props) {
           </h3>
           <div>
             {cart.shipping.address}, {cart.shipping.city},
-          {cart.shipping.postalCode}, {cart.shipping.country},
+            {cart.shipping.postalCode}, {cart.shipping.country},
           </div>
         </div>
         <div>
@@ -60,16 +64,16 @@ function PlaceOrderScreen(props) {
             <li>
               <h3>
                 Shopping Cart
-          </h3>
+              </h3>
               <div>
                 Price
-          </div>
+              </div>
             </li>
             {
               cartItems.length === 0 ?
                 <div>
                   Cart is empty
-          </div>
+                </div>
                 :
                 cartItems.map(item =>
                   <li>
@@ -96,7 +100,7 @@ function PlaceOrderScreen(props) {
           </ul>
         </div>
 
-      
+
       </div>
       <div className="placeorder-action">
         <ul>

@@ -32,7 +32,6 @@ function HomeScreen(props) {
   return (
     <>
       {category && <h2>{category}</h2>}
-
       <ul className="filter">
         <li className="width60pr">
           <form onSubmit={submitHandler}>
