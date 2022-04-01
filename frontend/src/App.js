@@ -53,7 +53,7 @@ function App() {
               </div>
             )}
           </div>
-          {/* <Notification msg={`this is the message for testing only`} /> */}
+          {/* <Notification msg={`Successfully done`} /> */}
 
         </header>
         <aside className="sidebar">

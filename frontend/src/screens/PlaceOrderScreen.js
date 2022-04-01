@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import CheckoutSteps from '../components/CheckoutSteps';
 import { createOrder } from '../actions/orderActions';
+import Notification from '../components/Notification';
 function PlaceOrderScreen(props) {
-
+  const [show, setShow] = useState(0)
   const cart = useSelector(state => state.cart);
   const orderCreate = useSelector(state => state.orderCreate);
   const { loading, success, error, order } = orderCreate;
@@ -29,7 +30,13 @@ function PlaceOrderScreen(props) {
       taxPrice, totalPrice
     }));
     if (payment.paymentMethod == "COD") {
-      props.history.push("/profile");
+      setShow(1);
+      setTimeout(() => {
+        setShow(0);
+
+        props.history.push("/profile");
+      }, 1000);
+
     }
 
   }
@@ -41,6 +48,9 @@ function PlaceOrderScreen(props) {
   }, [success]);
 
   return <div>
+    {(show) ? <Notification msg={`Successfully done`} /> : ''}
+
+
     <CheckoutSteps step1 step2 step3 step4 ></CheckoutSteps>
     <div className="placeorder">
       <div className="placeorder-info">
